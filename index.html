@@ -277,6 +277,31 @@
     .sponsor-cta .sponsor-mail { margin: 1.1rem auto 0; font-size: 0.9rem; }
     .sponsor-cta .sponsor-mail a { color: var(--jaune); font-weight: 600; }
 
+    /* Plaquette sponsors téléchargeable (fichier : assets/docs/) */
+    .plaquette {
+      display: grid; grid-template-columns: 260px 1fr; gap: 2.5rem; align-items: center;
+      max-width: 860px; margin: 0 auto 2.5rem; text-align: left;
+    }
+    .plaquette-apercu {
+      display: block; border-radius: 8px; overflow: hidden; background: #fff;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.5); transform: rotate(-2deg); transition: transform 0.2s;
+    }
+    .plaquette-apercu:hover { transform: rotate(0deg) scale(1.03); }
+    .plaquette-apercu img { display: block; width: 100%; height: auto; }
+    .plaquette h3 { font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .plaquette p { color: var(--texte-doux); margin: 0 0 1.2rem; max-width: none; }
+    .plaquette ul { list-style: none; margin: 0 0 1.5rem; color: var(--texte); }
+    .plaquette li { margin: 0.35rem 0; }
+    .plaquette li i { color: var(--jaune); width: 1.4rem; }
+    .plaquette .actions { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; }
+    .plaquette .meta { color: var(--texte-doux); font-size: 0.8rem; margin-top: 0.8rem; }
+    .btn-contour { border: 2px solid var(--jaune); color: var(--jaune); background: transparent; }
+    @media (max-width: 700px) {
+      .plaquette { grid-template-columns: 1fr; text-align: center; gap: 1.8rem; }
+      .plaquette-apercu { max-width: 220px; margin: 0 auto; }
+      .plaquette .actions { justify-content: center; }
+    }
+
     /* ============================ FOOTER ============================== */
     footer { background: #090a0d; padding: 3rem 1.5rem; text-align: center; }
     .socials { display: flex; gap: 1.2rem; justify-content: center; margin-bottom: 1.2rem; }
@@ -431,9 +456,26 @@
       </div>
 
       <div class="sponsor-cta">
-        <h3 data-i18n="sponsors.ctaTitle">Envie de nous soutenir ?</h3>
-        <p data-i18n="sponsors.ctaText">Matériel, financement, savoir-faire : chaque coup de main compte. Rejoignez l'aventure Opossum et gagnez en visibilité auprès de la communauté robotique.</p>
-        <a class="btn btn-jaune" href="mailto:scrat.opossum@gmail.com?subject=Devenir%20sponsor%20de%20la%20Team%20Opossum"><i class="fa-solid fa-handshake"></i> <span data-i18n="sponsors.ctaBtn">Devenir sponsor</span></a>
+        <!-- Plaquette sponsors : remplacer le PDF et l'aperçu dans assets/docs/ à chaque mise à jour -->
+        <div class="plaquette" id="plaquette">
+          <a class="plaquette-apercu" href="assets/docs/plaquette-team-opossum-2027.pdf" data-href-fr="assets/docs/plaquette-team-opossum-2027.pdf" data-href-en="assets/docs/brochure-team-opossum-2027-en.pdf" target="_blank" rel="noopener" aria-label="Ouvrir la plaquette">
+            <img src="assets/docs/plaquette-apercu.jpg" data-src-fr="assets/docs/plaquette-apercu.jpg" data-src-en="assets/docs/brochure-preview-en.jpg" alt="Première page de la plaquette Team Opossum 2027" data-alt-fr="Première page de la plaquette Team Opossum 2027" data-alt-en="First page of the Team Opossum 2027 brochure" width="640" height="828" loading="lazy" />
+          </a>
+          <div>
+            <h3 data-i18n="sponsors.ctaTitle">Envie de nous soutenir ?</h3>
+            <p data-i18n="sponsors.plaqText">Découvrez l'équipe, nos robots et nos ambitions pour 2027 dans notre plaquette de présentation, pensée pour nos futurs partenaires.</p>
+            <ul>
+              <li><i class="fa-solid fa-robot"></i> <span data-i18n="sponsors.plaq1">L'équipe, nos robots et notre parcours</span></li>
+              <li><i class="fa-solid fa-chart-line"></i> <span data-i18n="sponsors.plaq2">Notre audience et ce que nous offrons à nos partenaires</span></li>
+              <li><i class="fa-solid fa-microchip"></i> <span data-i18n="sponsors.plaq3">Nos technologies et nos projets pour 2027</span></li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-jaune" href="assets/docs/plaquette-team-opossum-2027.pdf" data-href-fr="assets/docs/plaquette-team-opossum-2027.pdf" data-href-en="assets/docs/brochure-team-opossum-2027-en.pdf" download="Plaquette-Team-Opossum-2027.pdf" data-download-fr="Plaquette-Team-Opossum-2027.pdf" data-download-en="Brochure-Team-Opossum-2027-EN.pdf"><i class="fa-solid fa-file-arrow-down"></i> <span data-i18n="sponsors.plaqBtn">Télécharger la plaquette</span></a>
+              <a class="btn btn-contour" href="mailto:scrat.opossum@gmail.com?subject=Devenir%20sponsor%20de%20la%20Team%20Opossum"><i class="fa-solid fa-handshake"></i> <span data-i18n="sponsors.ctaBtn">Devenir sponsor</span></a>
+            </div>
+            <p class="meta" data-i18n="sponsors.plaqMeta">PDF · 3 pages · 190 Ko</p>
+          </div>
+        </div>
         <p class="sponsor-mail" data-i18n="sponsors.mail">ou écrivez-nous à <a href="mailto:scrat.opossum@gmail.com?subject=Devenir%20sponsor%20de%20la%20Team%20Opossum">scrat.opossum@gmail.com</a></p>
       </div>
     </div>
@@ -476,6 +518,12 @@
         'sponsors.ctaTitle': `Envie de nous soutenir ?`,
         'sponsors.ctaText': `Matériel, financement, savoir-faire : chaque coup de main compte. Rejoignez l'aventure Opossum et gagnez en visibilité auprès de la communauté robotique.`,
         'sponsors.ctaBtn': `Devenir sponsor`,
+        'sponsors.plaqText': `Découvrez l'équipe, nos robots et nos ambitions pour 2027 dans notre plaquette de présentation, pensée pour nos futurs partenaires.`,
+        'sponsors.plaq1': `L'équipe, nos robots et notre parcours`,
+        'sponsors.plaq2': `Notre audience et ce que nous offrons à nos partenaires`,
+        'sponsors.plaq3': `Nos technologies et nos projets pour 2027`,
+        'sponsors.plaqBtn': `Télécharger la plaquette`,
+        'sponsors.plaqMeta': `PDF · 3 pages · 190 Ko`,
         'sponsors.mail': `ou écrivez-nous à <a href="mailto:scrat.opossum@gmail.com?subject=Devenir%20sponsor%20de%20la%20Team%20Opossum">scrat.opossum@gmail.com</a>`,
         'footer.copy': `© 2026 Team Opossum — Équipe de robotique.`,
         'card.read': `Lire l'article`
@@ -503,6 +551,12 @@
         'sponsors.ctaTitle': `Want to support us?`,
         'sponsors.ctaText': `Equipment, funding, expertise: every bit of help counts. Join the Opossum adventure and gain visibility within the robotics community.`,
         'sponsors.ctaBtn': `Become a sponsor`,
+        'sponsors.plaqText': `Get to know the team, our robots and our ambitions for 2027 in our presentation brochure, written for our future partners.`,
+        'sponsors.plaq1': `The team, our robots and our track record`,
+        'sponsors.plaq2': `Our audience and what we offer our partners`,
+        'sponsors.plaq3': `Our technologies and our plans for 2027`,
+        'sponsors.plaqBtn': `Download the brochure`,
+        'sponsors.plaqMeta': `PDF · 3 pages · 190 KB`,
         'sponsors.mail': `or email us at <a href="mailto:scrat.opossum@gmail.com?subject=Become%20a%20Team%20Opossum%20sponsor">scrat.opossum@gmail.com</a>`,
         'footer.copy': `© 2026 Team Opossum — Robotics team.`,
         'card.read': `Read the article`
@@ -528,6 +582,10 @@
     function applyStaticI18n() {
       document.documentElement.lang = LANG;
       document.querySelectorAll('[data-i18n]').forEach(el => { const v = T(el.getAttribute('data-i18n')); if (v) el.innerHTML = v; });
+      // Attributs dépendant de la langue (ex. plaquette FR / brochure EN) : data-href-fr / data-href-en, etc.
+      ['href', 'src', 'alt', 'download'].forEach(attr => {
+        document.querySelectorAll(`[data-${attr}-${LANG}]`).forEach(el => el.setAttribute(attr, el.getAttribute(`data-${attr}-${LANG}`)));
+      });
       document.querySelectorAll('#lang-switch button').forEach(b => b.classList.toggle('active', b.dataset.lang === LANG));
       syncCrossLinks();
     }

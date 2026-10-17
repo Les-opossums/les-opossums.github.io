@@ -295,7 +295,40 @@
     .plaquette li i { color: var(--jaune); width: 1.4rem; }
     .plaquette .actions { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; }
     .plaquette .meta { color: var(--texte-doux); font-size: 0.8rem; margin-top: 0.8rem; }
-    .btn-contour { border: 2px solid var(--jaune); color: var(--jaune); background: transparent; }
+    .btn-contour { border: 2px solid var(--jaune); color: var(--jaune); background: transparent; cursor: pointer; font-family: inherit; }
+
+    /* ===================== FENÊTRE CONTACT SPONSOR ===================== */
+    /* Un lien mailto: seul ne fait rien si aucune messagerie n'est configurée sur l'ordinateur :
+       cette fenêtre propose de copier l'adresse ou d'écrire depuis Gmail / Outlook en ligne. */
+    .contact-modal {
+      position: fixed; inset: 0; z-index: 210; display: flex; align-items: center; justify-content: center;
+      padding: 1rem; opacity: 0; visibility: hidden; transition: opacity 0.25s;
+    }
+    .contact-modal.open { opacity: 1; visibility: visible; }
+    .contact-backdrop { position: absolute; inset: 0; background: rgba(4,5,8,0.8); backdrop-filter: blur(4px); }
+    .contact-box {
+      position: relative; width: min(520px, 100%); background: var(--fond-2); border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08); padding: 2rem 1.8rem; text-align: center;
+      transform: translateY(20px); transition: transform 0.3s;
+    }
+    .contact-modal.open .contact-box { transform: translateY(0); }
+    .contact-box h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .contact-box p { color: var(--texte-doux); margin-bottom: 1.2rem; }
+    .contact-close {
+      position: absolute; top: 0.8rem; right: 0.9rem; background: none; border: 0; color: var(--texte-doux);
+      font-size: 1.6rem; line-height: 1; cursor: pointer;
+    }
+    .contact-close:hover { color: var(--jaune); }
+    .contact-mail {
+      display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; flex-wrap: wrap;
+      background: var(--fond); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+      padding: 0.4rem 0.4rem 0.4rem 1.2rem; margin-bottom: 1.2rem;
+    }
+    .contact-mail > span { font-weight: 600; color: var(--jaune); word-break: break-all; }
+    .contact-mail .btn { padding: 0.55rem 1.2rem; border: 0; cursor: pointer; font-family: inherit; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+    .contact-links .btn { padding: 0.6rem 1.1rem; font-size: 0.92rem; }
+    @media (max-width: 480px) { .contact-mail { justify-content: center; padding: 0.8rem; border-radius: var(--radius); } }
     @media (max-width: 700px) {
       .plaquette { grid-template-columns: 1fr; text-align: center; gap: 1.8rem; }
       .plaquette-apercu { max-width: 220px; margin: 0 auto; }
@@ -471,7 +504,7 @@
             </ul>
             <div class="actions">
               <a class="btn btn-jaune" href="assets/docs/plaquette-team-opossum-2027.pdf" data-href-fr="assets/docs/plaquette-team-opossum-2027.pdf" data-href-en="assets/docs/brochure-team-opossum-2027-en.pdf" download="Plaquette-Team-Opossum-2027.pdf" data-download-fr="Plaquette-Team-Opossum-2027.pdf" data-download-en="Brochure-Team-Opossum-2027-EN.pdf"><i class="fa-solid fa-file-arrow-down"></i> <span data-i18n="sponsors.plaqBtn">Télécharger la plaquette</span></a>
-              <a class="btn btn-contour" href="mailto:scrat.opossum@gmail.com?subject=Devenir%20sponsor%20de%20la%20Team%20Opossum"><i class="fa-solid fa-handshake"></i> <span data-i18n="sponsors.ctaBtn">Devenir sponsor</span></a>
+              <button type="button" class="btn btn-contour js-contact"><i class="fa-solid fa-handshake"></i> <span data-i18n="sponsors.ctaBtn">Devenir sponsor</span></button>
             </div>
             <p class="meta" data-i18n="sponsors.plaqMeta">PDF · 3 pages · 190 Ko</p>
           </div>
@@ -480,6 +513,25 @@
       </div>
     </div>
   </section>
+
+  <!-- Fenêtre « Devenir sponsor » (ouverte par les éléments .js-contact) -->
+  <div class="contact-modal" id="contact-modal" aria-hidden="true">
+    <div class="contact-backdrop" data-contact-close></div>
+    <div class="contact-box" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+      <button type="button" class="contact-close" data-contact-close aria-label="Fermer">&times;</button>
+      <h3 id="contact-title" data-i18n="contact.title">Devenir sponsor</h3>
+      <p data-i18n="contact.text">Écrivez-nous à cette adresse, nous vous répondrons rapidement.</p>
+      <div class="contact-mail">
+        <span>scrat.opossum@gmail.com</span>
+        <button type="button" class="btn btn-jaune" id="contact-copy"><i class="fa-regular fa-copy"></i> <span data-i18n="contact.copy">Copier l'adresse</span></button>
+      </div>
+      <div class="contact-links">
+        <a class="btn btn-contour" id="contact-gmail" target="_blank" rel="noopener" href="#"><i class="fa-brands fa-google"></i> Gmail</a>
+        <a class="btn btn-contour" id="contact-outlook" target="_blank" rel="noopener" href="#"><i class="fa-brands fa-microsoft"></i> Outlook</a>
+        <a class="btn btn-contour" id="contact-app" href="#"><i class="fa-solid fa-envelope"></i> <span data-i18n="contact.app">Ma messagerie</span></a>
+      </div>
+    </div>
+  </div>
 
   <!-- ============================= CONTACT ============================= -->
   <footer id="contact">
@@ -518,6 +570,12 @@
         'sponsors.ctaTitle': `Envie de nous soutenir ?`,
         'sponsors.ctaText': `Matériel, financement, savoir-faire : chaque coup de main compte. Rejoignez l'aventure Opossum et gagnez en visibilité auprès de la communauté robotique.`,
         'sponsors.ctaBtn': `Devenir sponsor`,
+        'contact.title': `Devenir sponsor`,
+        'contact.text': `Écrivez-nous à cette adresse, nous vous répondrons rapidement.`,
+        'contact.copy': `Copier l'adresse`,
+        'contact.copied': `Adresse copiée !`,
+        'contact.app': `Ma messagerie`,
+        'contact.subject': `Devenir sponsor de la Team Opossum`,
         'sponsors.plaqText': `Découvrez l'équipe, nos robots et nos ambitions pour 2027 dans notre plaquette de présentation, pensée pour nos futurs partenaires.`,
         'sponsors.plaq1': `L'équipe, nos robots et notre parcours`,
         'sponsors.plaq2': `Notre audience et ce que nous offrons à nos partenaires`,
@@ -551,6 +609,12 @@
         'sponsors.ctaTitle': `Want to support us?`,
         'sponsors.ctaText': `Equipment, funding, expertise: every bit of help counts. Join the Opossum adventure and gain visibility within the robotics community.`,
         'sponsors.ctaBtn': `Become a sponsor`,
+        'contact.title': `Become a sponsor`,
+        'contact.text': `Write to us at this address, we will get back to you quickly.`,
+        'contact.copy': `Copy address`,
+        'contact.copied': `Address copied!`,
+        'contact.app': `My mail app`,
+        'contact.subject': `Becoming a Team Opossum sponsor`,
         'sponsors.plaqText': `Get to know the team, our robots and our ambitions for 2027 in our presentation brochure, written for our future partners.`,
         'sponsors.plaq1': `The team, our robots and our track record`,
         'sponsors.plaq2': `Our audience and what we offer our partners`,
@@ -892,6 +956,49 @@
       }
       loadBilans();
       document.addEventListener('langchange', loadBilans);
+    })();
+  </script>
+
+  <script>
+    /* ====================== FENÊTRE « DEVENIR SPONSOR » ===================== */
+    (function () {
+      const MAIL = 'scrat.opossum@gmail.com';
+      const modal = document.getElementById('contact-modal');
+      if (!modal) return;
+      const copyBtn = document.getElementById('contact-copy');
+      const copyLabel = copyBtn.querySelector('span');
+      const t = k => (typeof T === 'function' ? T(k) : '');
+      function setLinks() {
+        const su = encodeURIComponent(t('contact.subject'));
+        document.getElementById('contact-gmail').href = `https://mail.google.com/mail/?view=cm&fs=1&to=${MAIL}&su=${su}`;
+        document.getElementById('contact-outlook').href = `https://outlook.office.com/mail/deeplink/compose?to=${MAIL}&subject=${su}`;
+        document.getElementById('contact-app').href = `mailto:${MAIL}?subject=${su}`;
+      }
+      function open() {
+        setLinks(); copyLabel.textContent = t('contact.copy');
+        modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        copyBtn.focus();
+      }
+      function close() {
+        modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+      async function copy() {
+        try { await navigator.clipboard.writeText(MAIL); }
+        catch (e) {
+          // Repli pour les navigateurs sans API presse-papiers (ou en file://)
+          const ta = document.createElement('textarea'); ta.value = MAIL; document.body.appendChild(ta);
+          ta.select(); try { document.execCommand('copy'); } catch (_) {} ta.remove();
+        }
+        copyLabel.textContent = t('contact.copied');
+        setTimeout(() => { copyLabel.textContent = t('contact.copy'); }, 2500);
+      }
+      document.querySelectorAll('.js-contact').forEach(b => b.addEventListener('click', e => { e.preventDefault(); open(); }));
+      modal.querySelectorAll('[data-contact-close]').forEach(el => el.addEventListener('click', close));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+      copyBtn.addEventListener('click', copy);
+      document.addEventListener('langchange', setLinks);
     })();
   </script>
 

@@ -107,7 +107,8 @@
     .logo { font-weight: 800; font-size: 1.15rem; letter-spacing: 0.04em; }
     .logo span { color: var(--jaune); }
     nav.menu { display: flex; gap: 1.6rem; align-items: center; }
-    nav.menu a { color: var(--texte-doux); font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+    nav.menu a { color: var(--texte-doux); font-weight: 500; font-size: 0.95rem; transition: color 0.2s; white-space: nowrap; }
+    @media (min-width: 961px) and (max-width: 1150px) { nav.menu { gap: 1rem; } nav.menu a { font-size: 0.86rem; } .logo { white-space: nowrap; } }
     nav.menu a:hover { color: var(--jaune); }
     nav.menu a.active { color: var(--jaune); font-weight: 600; }
     .burger { display: none; font-size: 1.5rem; background: none; border: none; color: var(--texte); cursor: pointer; }
@@ -116,7 +117,7 @@
     .lang-switch button { background: transparent; color: var(--texte-doux); border: none; padding: 0.3rem 0.68rem; font-family: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s, color 0.2s; }
     .lang-switch button.active { background: var(--jaune); color: #17130a; }
 
-    @media (max-width: 800px) {
+    @media (max-width: 960px) {
       nav.menu {
         position: fixed; top: 60px; right: 0; flex-direction: column;
         background: var(--fond-2); padding: 1.5rem 2rem; gap: 1.1rem;
@@ -125,6 +126,48 @@
       }
       nav.menu.open { transform: translateX(0); }
       .burger { display: block; }
+    }
+
+    /* ===================== CALCULATEUR 2027 (encart d'appel) ===================== */
+    .hero-new {
+      display: inline-flex; align-items: center; gap: 0.55rem; margin-top: 1.4rem;
+      background: rgba(14,15,19,0.7); border: 1px solid rgba(245,197,24,0.55); color: var(--texte);
+      padding: 0.45rem 1rem 0.45rem 0.5rem; border-radius: 999px; font-size: 0.9rem; font-weight: 500;
+      backdrop-filter: blur(6px); transition: border-color 0.2s, transform 0.15s;
+    }
+    .hero-new:hover { border-color: var(--jaune); transform: translateY(-2px); }
+    .hero-new .tag { background: var(--jaune); color: #17130a; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.15rem 0.55rem; border-radius: 999px; }
+    .hero-new i { color: var(--jaune); font-size: 0.8rem; }
+    @media (max-width: 420px) { .hero-new { font-size: 0.78rem; gap: 0.4rem; } .hero-new .tag { font-size: 0.65rem; } }
+
+    #calculateur { padding-top: 1rem; }
+    .calc-promo {
+      display: grid; grid-template-columns: 1.25fr 1fr; gap: 2rem; align-items: center;
+      background: radial-gradient(circle at 85% 30%, rgba(245,197,24,0.16), transparent 55%), var(--fond-2);
+      border: 1px solid rgba(245,197,24,0.45); border-radius: var(--radius); padding: 2.4rem 2.2rem;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    }
+    .calc-kicker { color: var(--jaune); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-promo h3 { font-size: clamp(1.5rem, 3.6vw, 2.1rem); font-weight: 800; line-height: 1.2; margin: 0.35rem 0 0.8rem; }
+    .calc-promo h3 span { color: var(--jaune); }
+    .calc-promo p { color: var(--texte-doux); margin-bottom: 1.5rem; max-width: 520px; }
+    .calc-promo .btn { font-size: 1.05rem; padding: 0.95rem 2rem; }
+    .calc-preview {
+      display: block; background: var(--fond); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius);
+      padding: 1.3rem; transform: rotate(-1.5deg); transition: transform 0.2s;
+    }
+    .calc-preview:hover { transform: rotate(0) scale(1.02); }
+    .calc-preview .pv-total { display: flex; align-items: baseline; gap: 0.4rem; }
+    .calc-preview .pv-total b { font-size: 3.2rem; font-weight: 800; color: var(--jaune); line-height: 1; }
+    .calc-preview .pv-total small { color: var(--texte-doux); font-weight: 600; }
+    .calc-preview .pv-rows { margin-top: 1rem; display: grid; gap: 0.5rem; }
+    .calc-preview .pv-row { display: flex; justify-content: space-between; align-items: center; background: var(--fond-2); border-radius: 10px; padding: 0.5rem 0.8rem; font-size: 0.9rem; }
+    .calc-preview .pv-row i { color: var(--jaune); width: 1.3rem; }
+    .calc-preview .pv-row b { font-variant-numeric: tabular-nums; }
+    @media (max-width: 760px) {
+      .calc-promo { grid-template-columns: 1fr; padding: 1.8rem 1.3rem; text-align: center; }
+      .calc-promo p { margin-left: auto; margin-right: auto; }
+      .calc-preview { max-width: 320px; margin: 0 auto; width: 100%; text-align: left; }
     }
 
     /* ============================== HERO ================================= */
@@ -367,6 +410,7 @@
       <a href="#apropos" data-i18n="nav.about">À propos</a>
       <a href="#robots" data-i18n="nav.robots">Robots</a>
       <a href="technique.html" data-i18n="nav.tech">Technique</a>
+      <a href="calculateur.html" data-i18n="nav.calc">Points 2027</a>
       <a href="#bilans" data-i18n="nav.reports">Bilans</a>
       <a href="#videos" data-i18n="nav.videos">Vidéos</a>
       <a href="#sponsors" data-i18n="nav.sponsors">Sponsors</a>
@@ -390,6 +434,8 @@
       <a class="btn btn-ig" href="https://www.instagram.com/scrat_opossums/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>
       <a class="btn btn-li" href="https://www.linkedin.com/company/team-opossum-robotique/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
     </div>
+    <!-- Pastille « Nouveau » : lien vers le calculateur de points 2027 -->
+    <a class="hero-new" href="calculateur.html"><span class="tag" data-i18n="hero.newTag">Nouveau</span><span data-i18n="hero.newCalc">Calculateur de points Eurobot 2027</span><i class="fa-solid fa-arrow-right"></i></a>
     <a href="#apropos" class="scroll-down" aria-label="Défiler"><i class="fa-solid fa-chevron-down"></i></a>
   </section>
 
@@ -427,6 +473,29 @@
       <div class="dots" id="dots"></div>
       <div id="explore3d" style="text-align:center; margin-top:2.2rem; scroll-margin-top:80px;">
         <a class="btn btn-jaune" href="technique.html"><i class="fa-solid fa-cube"></i> <span data-i18n="robots.techbtn">Explorer nos robots en 3D — fiches techniques (règlement 2026)</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CALCULATEUR 2027 (encart) ======================= -->
+  <section id="calculateur">
+    <div class="wrap">
+      <div class="calc-promo">
+        <div>
+          <div class="calc-kicker" data-i18n="calcPromo.kicker"><i class="fa-solid fa-chess-rook"></i> Saison 2027 · Camelot</div>
+          <h3 data-i18n="calcPromo.title">Combien vaut <span>votre match ?</span></h3>
+          <p data-i18n="calcPromo.text">Notre calculateur de points gratuit, à jour du règlement officiel 2027 : murs, tours, porte, Graal, retour du roi et assaut. Quelques touches suffisent pour connaître votre score, idéal pour préparer votre stratégie ou vérifier un match.</p>
+          <a class="btn btn-jaune" href="calculateur.html"><i class="fa-solid fa-calculator"></i> <span data-i18n="calcPromo.btn">Calculer mes points</span></a>
+        </div>
+        <a class="calc-preview" href="calculateur.html" aria-hidden="true" tabindex="-1">
+          <div class="pv-total"><b>127</b><small>pts</small></div>
+          <div class="pv-rows">
+            <div class="pv-row"><span><i class="fa-solid fa-chess-rook"></i> Camelot</span><b>57</b></div>
+            <div class="pv-row"><span><i class="fa-solid fa-trophy"></i> <span data-i18n="calcPromo.graal">Graal</span></span><b>25</b></div>
+            <div class="pv-row"><span><i class="fa-solid fa-crown"></i> <span data-i18n="calcPromo.roi">Retour du roi</span></span><b>10</b></div>
+            <div class="pv-row"><span><i class="fa-solid fa-horse-head"></i> <span data-i18n="calcPromo.assaut">Assaut</span></span><b>35</b></div>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -559,7 +628,7 @@
   <script>
     const I18N = {
       fr: {
-        'nav.home': `Accueil`, 'nav.about': `À propos`, 'nav.robots': `Robots`, 'nav.tech': `Technique`,
+        'nav.home': `Accueil`, 'nav.about': `À propos`, 'nav.robots': `Robots`, 'nav.tech': `Technique`, 'nav.calc': `Points 2027`,
         'nav.reports': `Bilans`, 'nav.videos': `Vidéos`, 'nav.sponsors': `Sponsors`, 'nav.contact': `Contact`,
         'hero.tagline': `Équipe de robotique — Coupe de France de Robotique`,
         'about.title': `À <span>propos</span>`,
@@ -570,6 +639,12 @@
         'robots.title': `Nos <span>robots</span>`,
         'robots.subtitle': `Découvrez les machines conçues, fabriquées et programmées par l'équipe.`,
         'robots.techbtn': `Explorer nos robots en 3D — fiches techniques (règlement 2026)`,
+        'hero.newTag': `Nouveau`, 'hero.newCalc': `Calculateur de points Eurobot 2027`,
+        'calcPromo.kicker': `<i class="fa-solid fa-chess-rook"></i> Saison 2027 · Camelot`,
+        'calcPromo.title': `Combien vaut <span>votre match ?</span>`,
+        'calcPromo.text': `Notre calculateur de points gratuit, à jour du règlement officiel 2027 : murs, tours, porte, Graal, retour du roi et assaut. Quelques touches suffisent pour connaître votre score, idéal pour préparer votre stratégie ou vérifier un match.`,
+        'calcPromo.btn': `Calculer mes points`,
+        'calcPromo.graal': `Graal`, 'calcPromo.roi': `Retour du roi`, 'calcPromo.assaut': `Assaut`,
         'reports.title': `Nos <span>bilans</span>`,
         'reports.subtitle': `Retour sur nos compétitions et les temps forts de la saison.`,
         'videos.title': `Nos <span>matchs</span> en vidéo`,
@@ -598,7 +673,7 @@
         'card.read': `Lire l'article`
       },
       en: {
-        'nav.home': `Home`, 'nav.about': `About`, 'nav.robots': `Robots`, 'nav.tech': `Technical`,
+        'nav.home': `Home`, 'nav.about': `About`, 'nav.robots': `Robots`, 'nav.tech': `Technical`, 'nav.calc': `2027 points`,
         'nav.reports': `Reports`, 'nav.videos': `Videos`, 'nav.sponsors': `Sponsors`, 'nav.contact': `Contact`,
         'hero.tagline': `Robotics team — French Robotics Cup`,
         'about.title': `About <span>us</span>`,
@@ -609,6 +684,12 @@
         'robots.title': `Our <span>robots</span>`,
         'robots.subtitle': `Discover the machines designed, built and programmed by the team.`,
         'robots.techbtn': `Explore our robots in 3D — technical sheets (2026 rules)`,
+        'hero.newTag': `New`, 'hero.newCalc': `Eurobot 2027 points calculator`,
+        'calcPromo.kicker': `<i class="fa-solid fa-chess-rook"></i> 2027 season · Camelot`,
+        'calcPromo.title': `What is <span>your match worth?</span>`,
+        'calcPromo.text': `Our free points calculator, up to date with the official 2027 rules: walls, towers, gate, Grail, return of the king and charge. A few taps give you your score, ideal to plan your strategy or check a match.`,
+        'calcPromo.btn': `Calculate my points`,
+        'calcPromo.graal': `Grail`, 'calcPromo.roi': `Return of the King`, 'calcPromo.assaut': `Charge`,
         'reports.title': `Our <span>reports</span>`,
         'reports.subtitle': `A look back at our competitions and the season's highlights.`,
         'videos.title': `Our <span>matches</span> on video`,
@@ -651,7 +732,7 @@
     function syncCrossLinks() {
       document.querySelectorAll('a[href]').forEach(a => {
         const h = a.getAttribute('href');
-        if (/^(index\.html|technique\.html)(\?|#|$)/.test(h)) a.setAttribute('href', withLang(h));
+        if (/^(index\.html|technique\.html|calculateur\.html)(\?|#|$)/.test(h)) a.setAttribute('href', withLang(h));
       });
     }
     function applyStaticI18n() {
@@ -683,7 +764,7 @@
 
     /* --------- Apparition au défilement (fondu + montée) --------- */
     (function () {
-      const sel = '.titre, .sous-titre, .apropos-txt, .apropos-stats .stat, #videos figure, .sponsor-grid a, .sponsor-cta, #robots .carousel, #robots .dots';
+      const sel = '.titre, .sous-titre, .apropos-txt, .apropos-stats .stat, #videos figure, .sponsor-grid a, .sponsor-cta, #robots .carousel, #robots .dots, .calc-promo';
       const els = document.querySelectorAll(sel);
       els.forEach(el => el.classList.add('reveal'));
       /* léger décalage pour les éléments d'un même groupe (tuiles, sponsors, vidéos...) */

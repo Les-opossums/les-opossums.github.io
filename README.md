@@ -7,6 +7,8 @@ aucune construction : GitHub Pages sert les fichiers directement.
 
 ```
 index.html            → tout le site (une seule page qui défile)
+technique.html        → fiche technique 3D des robots
+calculateur.html      → calculateur de points Eurobot 2027 (barème dans BAREME / LIMITES en haut du script)
 assets/img/           → photos (banner.jpg, robots, bilans...)
 assets/img/sponsors/  → logos des partenaires
 assets/docs/          → plaquette sponsors FR + EN (PDF) et leurs aperçus

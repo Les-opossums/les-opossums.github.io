@@ -216,7 +216,7 @@
     function syncCrossLinks() {
       document.querySelectorAll('a[href]').forEach(a => {
         const h = a.getAttribute('href');
-        if (/^(index\.html|technique\.html)(\?|#|$)/.test(h)) a.setAttribute('href', withLang(h));
+        if (/^(index\.html|technique\.html|calculateur\.html)(\?|#|$)/.test(h)) a.setAttribute('href', withLang(h));
       });
     }
     function applyStaticI18n() {

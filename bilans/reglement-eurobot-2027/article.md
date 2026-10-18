@@ -20,10 +20,6 @@ Comme chaque année, toutes les actions sont indépendantes et aucune n'est obli
 
 ![](chateau.jpg)
 
-### Ce qui a changé depuis la version bêta
-
-Le barème est maintenant fixé. Les carrières contiennent des pierres **couchées et empilées** (et non plus debout), l'orientation des tags ArUco est précisée, et les zones de mur passent à 200 × 400 mm. Côté Graal, il doit être plus grand qu'un cube de 60 mm et il est désormais interdit de toucher à celui de l'adversaire.
-
 ### Calculez vos points
 
 Pour préparer votre stratégie ou vérifier un match, nous avons mis en ligne un **[calculateur de points 2027](calculateur.html)** : quelques touches suffisent pour obtenir votre score.
